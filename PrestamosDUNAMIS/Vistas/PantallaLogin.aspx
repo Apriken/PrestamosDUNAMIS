@@ -58,21 +58,21 @@
                     <h5 class="text-center mb-4">Sistema Gestión de Préstamos</h5>
 
                     <!-- Formulario de Login -->
-                    <form>
+                    <form runat="server">
                         <!-- Campo Usuario -->
                         <div class="mb-3">
                             <label for="usuario" class="form-label">Usuario</label>
-                            <input type="text" class="form-control form-control-lg" id="usuario" placeholder="Ingresa tu usuario">
+                            <input type="text" class="form-control form-control-lg" id="txt_correo" placeholder="Ingresa tu correo" runat="server">
                         </div>
                         
                         <!-- Campo Contraseña -->
                         <div class="mb-3">
                             <label for="contrasena" class="form-label">Contraseña</label>
-                            <input type="password" class="form-control form-control-lg" id="contrasena" placeholder="Ingresa tu contraseña">
+                            <input type="password" class="form-control form-control-lg" id="txt_contrasena" placeholder="Ingresa tu contraseña" runat="server">
                         </div>
                         
                         <!-- Botón Ingresar -->
-                        <button type="submit" class="btn btn-custom btn-lg w-100" onclick="window.location.href='PaginaPrincipal.aspx'; return false;" >Ingresar</button>
+                        <asp:Button class="btn btn-custom btn-lg w-100" ID="btn_Login" runat="server" Text="Ingresar" OnClick="btn_Login_Click"/>
                     </form>
                 </div>
             </div>

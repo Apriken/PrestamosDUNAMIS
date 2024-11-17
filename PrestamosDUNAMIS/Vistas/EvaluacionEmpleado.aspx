@@ -23,36 +23,20 @@
 
 
 
-      <div class="container mt-5">
+    <div class="container mt-5">
         <!-- Título principal centrado -->
         <h1 class="text-center mb-4">Evaluación Empleado</h1>
 
         <!-- Formulario de evaluación -->
-        <form>
-            <!-- Campos de evaluación -->
+        <form runat="server">
+          
             <div class="mb-3">
-                <label for="idEvaluacion" class="form-label">Id Evaluación</label>
-                <input type="text" class="form-control" id="idEvaluacion" placeholder="Ingrese el ID de evaluación">
-            </div>
-
-            <div class="mb-3">
-                <label for="nombreEmpleado" class="form-label">Nombre del Empleado</label>
-                <input type="text" class="form-control" id="nombreEmpleado" placeholder="Ingrese el nombre del empleado">
-            </div>
-
-            <div class="mb-3">
-                <label for="idEmpleado" class="form-label">Id Empleado</label>
-                <input type="text" class="form-control" id="idEmpleado" placeholder="Ingrese el ID del empleado">
+                <asp:DropDownList ID="ddlEmpleado" class="form-label" runat="server"></asp:DropDownList>
             </div>
 
             <div class="mb-3">
                 <label for="fechaEvaluacion" class="form-label">Fecha de Evaluación</label>
-                <input type="date" class="form-control" id="fechaEvaluacion">
-            </div>
-
-            <div class="mb-3">
-                <label for="rendimiento" class="form-label">Rendimiento</label>
-                <input type="text" class="form-control" id="rendimiento" placeholder="Ingrese el rendimiento del empleado">
+                <input type="date" class="form-control" id="txt_fechaEvaluacion" runat="server">
             </div>
 
             <!-- Título de Criterios centrado -->
@@ -60,27 +44,32 @@
 
             <!-- Criterios -->
             <div class="mb-3">
+                <label for="rendimiento" class="form-label">Rendimiento</label>
+                <input type="number" class="form-control" id="txt_rendimiento" placeholder="Calificación de rendimiento (0-25)" runat="server" min="0" max="25" required>
+            </div>
+            
+            <div class="mb-3">
                 <label for="puntualidad" class="form-label">Puntualidad</label>
-                <input type="number" class="form-control" id="puntualidad" placeholder="Calificación de puntualidad (1-10)">
+                <input type="number" class="form-control" id="txt_puntualidad" placeholder="Calificación de puntualidad (0-25)" runat="server" min="0" max="25" required>
             </div>
 
             <div class="mb-3">
                 <label for="produccion" class="form-label">Producción</label>
-                <input type="number" class="form-control" id="produccion" placeholder="Calificación de producción (1-10)">
+                <input type="number" class="form-control" id="txt_produccion" placeholder="Calificación de producción (0-25)" runat="server" min="0" max="25" required>
             </div>
 
             <div class="mb-3">
                 <label for="orden" class="form-label">Orden</label>
-                <input type="number" class="form-control" id="orden" placeholder="Calificación de orden (1-10)">
+                <input type="number" class="form-control" id="txt_orden" placeholder="Calificación de orden (0-25)" runat="server" min="0" max="25" required>
             </div>
 
             <!-- Botón para enviar el formulario -->
-            <button type="submit" class="btn btn-primary">Enviar Evaluación</button>
+            <asp:Button ID="btn_evaluar" class="btn btn-primary" runat="server" Text="Enviar Evaluación" OnClick="btn_evaluar_Click" />
         </form>
     </div>
 
 
-      <footer class="bg-light text-dark text-center py-3 mt-5">
+    <footer class="bg-light text-dark text-center py-3 mt-5">
         <p class="mb-0">2024 DUNAMIS S.A. Todos los derechos reservados</p>
     </footer>
 

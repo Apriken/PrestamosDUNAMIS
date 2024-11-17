@@ -1,5 +1,6 @@
 ﻿using PrestamosDUNAMIS.BaseDatos;
 using PrestamosDUNAMIS.Modelos;
+using System.Collections.Generic;
 
 namespace PrestamosDUNAMIS.Controladores
 {
@@ -10,6 +11,11 @@ namespace PrestamosDUNAMIS.Controladores
         public string InsertaEvaluacion(Evaluacion input)
         {
             return EvaluacionBD.InsertaEvaluacion(input);
+        }
+
+        public List<Empleado> cargaComboEmpleadosL()
+        {
+            return EvaluacionBD.cargaComboEmpleados();
         }
     }
 }
