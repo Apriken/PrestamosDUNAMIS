@@ -12,7 +12,7 @@ namespace PrestamosDUNAMIS.BaseDatos
         {
             List<Empleado> listaEmpleados = new List<Empleado>();
 
-            // Consulta SQL para insertar datos
+            // Consulta SQL para leer datos
             string query = "SELECT idEmpleado, Nombre FROM dbo.Empleado";
 
 
