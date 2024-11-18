@@ -8,7 +8,7 @@ namespace PrestamosDUNAMIS.BaseDatos
     {
         public bool Login(string correo, string clave)
         {
-            // Consulta SQL para insertar datos
+            // Consulta SQL para leer datos
             string query = "SELECT 1 FROM dbo.Empleado WHERE Correo_Organizacional = @Correo AND Clave_Usuario = @Clave";
 
             using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["cnx"].ToString()))
