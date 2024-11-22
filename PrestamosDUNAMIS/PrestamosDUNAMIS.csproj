@@ -67,6 +67,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Vistas\CapacidadPago.aspx" />
     <Content Include="Vistas\EvaluacionCapacidadPago.aspx" />
     <Content Include="Vistas\EvaluacionEmpleado.aspx" />
     <Content Include="Vistas\EvaluacionSolicitudPrestamo.aspx" />
@@ -81,10 +82,21 @@
     <Compile Include="BaseDatos\EvaluacionBD.cs" />
     <Compile Include="BaseDatos\LoginBD.cs" />
     <Compile Include="Controladores\EvaluacionL.cs" />
+    <Compile Include="Controladores\CapacidadPagoModel.cs" />
     <Compile Include="Controladores\LoginL.cs" />
+    <Compile Include="Modelos\CapacidadPago.aspx.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="Modelos\Empleado.cs" />
     <Compile Include="Modelos\Evaluacion.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Vistas\CapacidadPago.aspx.cs">
+      <DependentUpon>CapacidadPago.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Vistas\CapacidadPago.aspx.designer.cs">
+      <DependentUpon>CapacidadPago.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Vistas\EvaluacionCapacidadPago.aspx.cs">
       <DependentUpon>EvaluacionCapacidadPago.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

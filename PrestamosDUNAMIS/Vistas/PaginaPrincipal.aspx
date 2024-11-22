@@ -88,6 +88,17 @@
                 </div>
             </div>
 
+            <!-- Cuadro 4: Capacidad de Pago -->
+            <div class="col">
+                <div class="card card-custom">
+                    <div class="card-body">
+                        <h5 class="card-title">Capacidad de Pago</h5>
+                        <p class="card-text">Evalua la capacidad de pago de cada empleado tomando en cuenta su salario bruto.</p>
+                        <a href="capacidad_pago.html" class="btn btn-light" onclick="window.location.href='CapacidadPago.aspx'; return false;">Ir a Gestionar</a>
+                    </div>
+                </div>
+            </div>      
+
             <!-- Cuadro 5: Reportes -->
             <div class="col">
                 <div class="card card-custom">
