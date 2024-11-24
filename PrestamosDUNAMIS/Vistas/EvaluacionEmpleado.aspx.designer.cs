@@ -24,13 +24,13 @@ namespace PrestamosDUNAMIS.Vistas
         protected global::System.Web.UI.WebControls.DropDownList ddlEmpleado;
 
         /// <summary>
-        /// Control txt_fechaEvaluacion.
+        /// Control ddlEvaluacionFecha.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl txt_fechaEvaluacion;
+        protected global::System.Web.UI.WebControls.DropDownList ddlEvaluacionFecha;
 
         /// <summary>
         /// Control txt_rendimiento.
@@ -67,14 +67,5 @@ namespace PrestamosDUNAMIS.Vistas
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl txt_orden;
-
-        /// <summary>
-        /// Control btn_evaluar.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btn_evaluar;
     }
 }

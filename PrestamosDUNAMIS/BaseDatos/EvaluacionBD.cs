@@ -3,6 +3,8 @@ using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data.SqlClient;
+using System.Globalization;
+using System.Text;
 
 namespace PrestamosDUNAMIS.BaseDatos
 {
@@ -47,7 +49,90 @@ namespace PrestamosDUNAMIS.BaseDatos
             }
         }
 
-        public string InsertaEvaluacion(Evaluacion input)
+        public List<DateTime> cargaComboEvaluacionFecha(int id)
+        {
+            List<DateTime> lstFechas = new List<DateTime>();
+
+            // Consulta SQL para leer datos
+            StringBuilder query = new StringBuilder();
+
+            query.AppendLine("SELECT A.Fecha_Evaluacion");
+            query.AppendLine("FROM Evaluacion A");
+            query.AppendLine("INNER JOIN Empleado B ON A.idEmpleado =  B.idEmpleado");
+            query.AppendLine("WHERE B.idEmpleado = " + id);
+
+
+
+            using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["cnx"].ToString()))
+            {
+                SqlCommand command = new SqlCommand(query.ToString(), connection);
+
+                try
+                {
+                    connection.Open();
+                    command.ExecuteNonQuery();
+
+                    using (var reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            lstFechas.Add(Convert.ToDateTime(reader["Fecha_Evaluacion"]));
+                        }
+                    }
+                }
+                catch (Exception)
+                {
+                    return null;
+                }
+
+                return lstFechas;
+            }
+        }
+
+        public Evaluacion CargarEvaluacion(string fecha, int Id)
+        {
+            DateTime fechaDt = DateTime.Parse(fecha, new CultureInfo("es-ES"));
+
+            // Consulta SQL para insertar datos
+            string query = "SELECT Rendimiento, Puntualidad, Productividad, Orden " +
+                               "FROM Evaluacion " +
+                               "WHERE Fecha_Evaluacion = '" + fechaDt + "' AND idEmpleado = " + Id;
+
+                using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["cnx"].ToString()))
+                {
+                    SqlCommand command = new SqlCommand(query, connection);
+
+                    try
+                    {
+                        connection.Open();
+                        using (var reader = command.ExecuteReader())
+                        {
+                            if (reader.Read()) // Verifica si se encuentran datos
+                            {
+                                return new Evaluacion
+                                {
+                                    Rendimiento = Convert.ToDouble(reader["Rendimiento"]),
+                                    Puntualidad = Convert.ToDouble(reader["Puntualidad"]),
+                                    Productividad = Convert.ToDouble(reader["Productividad"]),
+                                    Orden = Convert.ToDouble(reader["Orden"])
+                                };
+                            }
+                            else
+                            {
+                                return null;
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        return null;
+                    }
+                }
+            
+            
+        }
+
+        /*public string InsertaEvaluacion(Evaluacion input)
         {
             // Consulta SQL para insertar datos
             string query = "INSERT INTO Evaluacion (Rendimiento, Fecha_Evaluacion, idEmpleado, Puntualidad, Productividad, Orden) " +
@@ -77,6 +162,6 @@ namespace PrestamosDUNAMIS.BaseDatos
                     return ex.Message;
                 }
             }
-        }
+        }*/
     }
 }

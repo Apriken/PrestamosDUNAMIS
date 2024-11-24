@@ -91,10 +91,12 @@
     </style>
 </head>
 <body>
+
     <header>
         <h1>DUNAMIS S.A.</h1>
         <h2>Capacidad de Pago</h2>
     </header>
+
     <main>
         <div class="container">
             <form id="CapacidadPagoForm" runat="server">
@@ -119,9 +121,11 @@
             </asp:Panel>
         </div>
     </main>
+
     <footer class="text-center py-3 mt-5">
         <p class="mb-0">2024 DUNAMIS S.A. Todos los derechos reservados</p>
     </footer>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+AMxrHkqF4aQ0wPCpJ7euNsFZ6p6k" crossorigin="anonymous"></script>
     <script>
         // Controla la barra de progreso (puede ser manejada desde el servidor también)

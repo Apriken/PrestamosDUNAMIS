@@ -31,13 +31,14 @@
         <form runat="server">
           
             <div class="mb-3">
-                <asp:DropDownList ID="ddlEmpleado" class="form-label" runat="server"></asp:DropDownList>
+                <asp:DropDownList ID="ddlEmpleado" class="form-label" runat="server" OnSelectedIndexChanged="ddlEmpleado_SelectedIndexChanged" AutoPostBack="true"></asp:DropDownList>
+            </div>
+            <!-- --------------- -->
+            <div class="mb-3">
+                <label for="fechaEvaluacion" class="form-label">Seleccione una fecha de evaluacion</label>
+                <asp:DropDownList ID="ddlEvaluacionFecha" class="form-label" runat="server"  OnSelectedIndexChanged="ddlEvaluacionFecha_SelectedIndexChanged" AutoPostBack="true"></asp:DropDownList>
             </div>
 
-            <div class="mb-3">
-                <label for="fechaEvaluacion" class="form-label">Fecha de Evaluación</label>
-                <input type="date" class="form-control" id="txt_fechaEvaluacion" runat="server">
-            </div>
 
             <!-- Título de Criterios centrado -->
             <h2 class="text-center mt-4 mb-3">Criterios</h2>
@@ -45,26 +46,24 @@
             <!-- Criterios -->
             <div class="mb-3">
                 <label for="rendimiento" class="form-label">Rendimiento</label>
-                <input type="number" class="form-control" id="txt_rendimiento" placeholder="Calificación de rendimiento (0-25)" runat="server" min="0" max="25" required>
+                <input type="number" class="form-control" id="txt_rendimiento"  runat="server" min="0" max="25" readonly>
             </div>
             
             <div class="mb-3">
                 <label for="puntualidad" class="form-label">Puntualidad</label>
-                <input type="number" class="form-control" id="txt_puntualidad" placeholder="Calificación de puntualidad (0-25)" runat="server" min="0" max="25" required>
+                <input type="number" class="form-control" id="txt_puntualidad"  runat="server" min="0" max="25" readonly>
             </div>
 
             <div class="mb-3">
                 <label for="produccion" class="form-label">Producción</label>
-                <input type="number" class="form-control" id="txt_produccion" placeholder="Calificación de producción (0-25)" runat="server" min="0" max="25" required>
+                <input type="number" class="form-control" id="txt_produccion" runat="server" min="0" max="25" readonly>
             </div>
 
             <div class="mb-3">
                 <label for="orden" class="form-label">Orden</label>
-                <input type="number" class="form-control" id="txt_orden" placeholder="Calificación de orden (0-25)" runat="server" min="0" max="25" required>
+                <input type="number" class="form-control" id="txt_orden"  runat="server" min="0" max="25" readonly>
             </div>
 
-            <!-- Botón para enviar el formulario -->
-            <asp:Button ID="btn_evaluar" class="btn btn-primary" runat="server" Text="Enviar Evaluación" OnClick="btn_evaluar_Click" />
         </form>
     </div>
 
