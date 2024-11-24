@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data.SqlClient;
+using System.Globalization;
 using System.Text;
 
 namespace PrestamosDUNAMIS.BaseDatos
@@ -48,9 +49,9 @@ namespace PrestamosDUNAMIS.BaseDatos
             }
         }
 
-        public List<Evaluacion> cargaComboEvaluacionFecha()
+        public List<DateTime> cargaComboEvaluacionFecha(int id)
         {
-            List<Evaluacion> listaEvaluacion = new List<Evaluacion>();
+            List<DateTime> lstFechas = new List<DateTime>();
 
             // Consulta SQL para leer datos
             StringBuilder query = new StringBuilder();
@@ -58,7 +59,8 @@ namespace PrestamosDUNAMIS.BaseDatos
             query.AppendLine("SELECT A.Fecha_Evaluacion");
             query.AppendLine("FROM Evaluacion A");
             query.AppendLine("INNER JOIN Empleado B ON A.idEmpleado =  B.idEmpleado");
-            query.AppendLine("WHERE B.idEmpleado = 1");
+            query.AppendLine("WHERE B.idEmpleado = " + id);
+
 
 
             using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["cnx"].ToString()))
@@ -74,13 +76,7 @@ namespace PrestamosDUNAMIS.BaseDatos
                     {
                         while (reader.Read())
                         {
-                            var evaluacion = new Evaluacion
-                            {
-                                Fecha_Evaluacion = Convert.ToDateTime(reader["Fecha_Evaluacion"]),
-                                IdEmpleado = Convert.ToInt32(reader["idEmpleado"])
-                                
-                            };
-                            listaEvaluacion.Add(evaluacion);
+                            lstFechas.Add(Convert.ToDateTime(reader["Fecha_Evaluacion"]));
                         }
                     }
                 }
@@ -89,50 +85,51 @@ namespace PrestamosDUNAMIS.BaseDatos
                     return null;
                 }
 
-                return listaEvaluacion;
+                return lstFechas;
             }
         }
 
-        public string CargarEvaluacion(Evaluacion input)
+        public Evaluacion CargarEvaluacion(string fecha, int Id)
         {
+            DateTime fechaDt = DateTime.Parse(fecha, new CultureInfo("es-ES"));
+
             // Consulta SQL para insertar datos
-            string query = "SELECT A.Rendimiento,A.Puntualidad,A.Productividad,A.Orden " +
-                           "FROM Evaluacion A"+
-                           "INNER JOIN Empleado B ON A.idEmpleado =  B.idEmpleado" +
-                           "WHERE B.idEmpleado = @idEmpleado";
+            string query = "SELECT Rendimiento, Puntualidad, Productividad, Orden " +
+                               "FROM Evaluacion " +
+                               "WHERE Fecha_Evaluacion = '" + fechaDt + "' AND idEmpleado = " + Id;
 
-            using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["cnx"].ToString()))
-            {
-                SqlCommand command = new SqlCommand(query, connection);
-                // Agregar parámetro de idEmpleado
-                command.Parameters.AddWithValue("@idEmpleado", input.IdEmpleado);
-
-                try
+                using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["cnx"].ToString()))
                 {
-                    connection.Open();
-                    using (var reader = command.ExecuteReader())
-                    {
-                        if (reader.Read()) // Verifica si se encuentran datos
-                        {
-                            // Cargar los valores en el objeto Evaluacion
-                            input.Rendimiento = Convert.ToDouble(reader["Rendimiento"].ToString());
-                            input.Puntualidad = Convert.ToDouble(reader["Puntualidad"].ToString());
-                            input.Productividad = Convert.ToDouble(reader["Productividad"].ToString());
-                            input.Orden = Convert.ToDouble(reader["Orden"].ToString());
+                    SqlCommand command = new SqlCommand(query, connection);
 
-                            return "Evaluación cargada exitosamente";
-                        }
-                        else
+                    try
+                    {
+                        connection.Open();
+                        using (var reader = command.ExecuteReader())
                         {
-                            return "No se encontraron datos para este empleado";
+                            if (reader.Read()) // Verifica si se encuentran datos
+                            {
+                                return new Evaluacion
+                                {
+                                    Rendimiento = Convert.ToDouble(reader["Rendimiento"]),
+                                    Puntualidad = Convert.ToDouble(reader["Puntualidad"]),
+                                    Productividad = Convert.ToDouble(reader["Productividad"]),
+                                    Orden = Convert.ToDouble(reader["Orden"])
+                                };
+                            }
+                            else
+                            {
+                                return null;
+                            }
                         }
                     }
+                    catch (Exception ex)
+                    {
+                        return null;
+                    }
                 }
-                catch (Exception ex)
-                {
-                    return "Error: " + ex.Message;
-                }
-            }
+            
+            
         }
 
         /*public string InsertaEvaluacion(Evaluacion input)

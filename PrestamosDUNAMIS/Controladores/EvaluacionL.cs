@@ -1,6 +1,8 @@
 ﻿using PrestamosDUNAMIS.BaseDatos;
 using PrestamosDUNAMIS.Modelos;
+using System;
 using System.Collections.Generic;
+using System.Runtime.Remoting.Messaging;
 
 namespace PrestamosDUNAMIS.Controladores
 {
@@ -18,9 +20,14 @@ namespace PrestamosDUNAMIS.Controladores
             return EvaluacionBD.cargaComboEmpleados();
         }
 
-        public List<Evaluacion> cargaComboEvaluacionFechaL()
+        public List<DateTime> cargaComboEvaluacionFechaL(int id)
         {
-            return EvaluacionBD.cargaComboEvaluacionFecha();
+            return EvaluacionBD.cargaComboEvaluacionFecha(id);
+        }
+
+        public Evaluacion cargarEvaluacionL(string fecha, int Id)
+        {
+            return EvaluacionBD.CargarEvaluacion(fecha, Id);
         }
     }
 }

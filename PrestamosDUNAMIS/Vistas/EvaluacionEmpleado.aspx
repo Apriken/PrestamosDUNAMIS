@@ -31,12 +31,12 @@
         <form runat="server">
           
             <div class="mb-3">
-                <asp:DropDownList ID="ddlEmpleado" class="form-label" runat="server" OnSelectedIndexChanged="ddlEmpleado_SelectedIndexChanged"></asp:DropDownList>
+                <asp:DropDownList ID="ddlEmpleado" class="form-label" runat="server" OnSelectedIndexChanged="ddlEmpleado_SelectedIndexChanged" AutoPostBack="true"></asp:DropDownList>
             </div>
             <!-- --------------- -->
             <div class="mb-3">
                 <label for="fechaEvaluacion" class="form-label">Seleccione una fecha de evaluacion</label>
-                <asp:DropDownList ID="ddlEvaluacionFecha" class="form-label" runat="server"  OnSelectedIndexChanged="ddlEvaluacionFecha_SelectedIndexChanged" ></asp:DropDownList>
+                <asp:DropDownList ID="ddlEvaluacionFecha" class="form-label" runat="server"  OnSelectedIndexChanged="ddlEvaluacionFecha_SelectedIndexChanged" AutoPostBack="true"></asp:DropDownList>
             </div>
 
 
