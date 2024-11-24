@@ -24,10 +24,12 @@ namespace PrestamosDUNAMIS.Vistas
             if (!IsPostBack)
             {
                 CargarEmpleadosEnDropDownList();
+                CargarEvaluacionEnDropDownList();
+                
             }
         }
 
-        protected void btn_evaluar_Click(object sender, EventArgs e)
+        /*protected void btn_evaluar_Click(object sender, EventArgs e)
         {
             if (Convert.ToInt32(ddlEmpleado.SelectedValue) == 0)
             {
@@ -38,15 +40,15 @@ namespace PrestamosDUNAMIS.Vistas
             }
 
             evaluacion.IdEmpleado = Convert.ToInt32(ddlEmpleado.SelectedValue);
-            evaluacion.Fecha_Evaluacion = Convert.ToDateTime(txt_fechaEvaluacion.Value);
+            //evaluacion.Fecha_Evaluacion = Convert.ToDateTime(txt_fechaEvaluacion.Value);
             evaluacion.Rendimiento = Convert.ToDouble(txt_rendimiento.Value);
             evaluacion.Puntualidad = Convert.ToDouble(txt_puntualidad.Value);
             evaluacion.Productividad = Convert.ToDouble(txt_produccion.Value);
             evaluacion.Orden = Convert.ToDouble(txt_orden.Value);
 
             alertJS(evaluacionL.InsertaEvaluacion(evaluacion));
-            limpiar();
-        }
+            //limpiar();
+        }*/
 
         #endregion
 
@@ -68,23 +70,65 @@ namespace PrestamosDUNAMIS.Vistas
             ddlEmpleado.Items.Insert(0, new ListItem("Seleccione un empleado", "0"));
         }
 
+        private void CargarEvaluacionEnDropDownList()
+        {
+            // Llama al método que carga los empleados
+            List<Evaluacion> evaluacionFecha= evaluacionL.cargaComboEvaluacionFechaL();
+
+            // Asigna la lista al DropDownList
+            ddlEvaluacionFecha.DataSource = evaluacionFecha;
+            ddlEvaluacionFecha.DataTextField = "Fecha"; // Campo que se mostrará en el DropDownList
+            ddlEvaluacionFecha.DataValueField = "IdEmpleado"; // Campo que será el valor del DropDownList
+
+            ddlEvaluacionFecha.DataBind();
+
+            // Opcional: Agregar un elemento por defecto
+            ddlEvaluacionFecha.Items.Insert(0, new ListItem( "aa/mm/dd")); ;
+        }
+
         private void alertJS(string msj)
         {
             //Muestra alerta JS
             ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('" + msj + "');", true);
         }
 
-        private void limpiar()
+        /*private void limpiar()
         {
             ddlEmpleado.SelectedIndex = 0;
-            txt_fechaEvaluacion.Value = string.Empty;
+            //txt_fechaEvaluacion.Value = string.Empty;
             txt_rendimiento.Value = string.Empty;
             txt_puntualidad.Value = string.Empty;
             txt_produccion.Value = string.Empty;
             txt_orden.Value = string.Empty;
-        }
+        }*/
 
         #endregion
+
+        protected void ddlEmpleado_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+        protected void ddlEvaluacionFecha_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Evaluacion evaluacionFecha = new Evaluacion();
+            evaluacionFecha.IdEmpleado = 1;
+            string resultado ;
+
+            /*if (resultado == "Evaluación cargada exitosamente")
+            {
+                // Asignar los valores a los controles
+                txt_rendimiento.Value = evaluacion.Rendimiento.ToString();
+                txt_puntualidad.Value = evaluacion.Puntualidad.ToString();
+                txt_produccion.Value = evaluacion.Productividad.ToString();
+                txt_orden.Value = evaluacion.Orden.ToString();
+            }
+            else
+            {
+                // Si no se encuentra la evaluación, puedes mostrar un mensaje o limpiar los valores
+                Response.Write("<script>alert('No se encontraron datos para este empleado.');</script>");
+            }*/
+        }
+
 
     }
 }

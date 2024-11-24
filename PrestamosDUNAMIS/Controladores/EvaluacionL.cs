@@ -8,14 +8,19 @@ namespace PrestamosDUNAMIS.Controladores
     {
         EvaluacionBD EvaluacionBD = new EvaluacionBD();
 
-        public string InsertaEvaluacion(Evaluacion input)
+        /*public string InsertaEvaluacion(Evaluacion input)
         {
             return EvaluacionBD.InsertaEvaluacion(input);
-        }
+        }*/
 
         public List<Empleado> cargaComboEmpleadosL()
         {
             return EvaluacionBD.cargaComboEmpleados();
+        }
+
+        public List<Evaluacion> cargaComboEvaluacionFechaL()
+        {
+            return EvaluacionBD.cargaComboEvaluacionFecha();
         }
     }
 }

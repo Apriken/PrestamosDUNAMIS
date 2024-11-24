@@ -11,109 +11,129 @@
     <title>Dumanis S.A</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
    <style>
-        .card-custom {
+        body {
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+        }
+
+        header {
+            
+            height: 100px;
+            background-color: #42ab49;
+            
+        }
+
+        .main-container {
+            display: flex;
+            flex: 1;
+            overflow: auto;
+  
+        }
+
+        .sidebar {
+            width: 250px;
             background-color: #5ac15d;
             color: white;
+            padding: 20px;
+            position: fixed;
+            top: 100px;
+            bottom: 50px;
+            overflow-y: auto;
+         
+            
         }
-        .card-custom .btn-light {
-            background-color: white;
-            color: #5ac15d;
+
+        .sidebar h2 {
+            text-align: center;
         }
-        .card-custom .btn-light:hover {
-            background-color: #42ab49;
+
+        .content {
+           margin-left: 250px;
+            padding: 0;
+            flex: 1;
+            background-color: #f8f9fa;
+            position: relative;
+            overflow: hidden;
+           
+        }
+        .content img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; 
+        }
+
+        footer {
+            flex-shrink: 0;
+            height: 50px;
+            
         }
     </style>
 </head>
 
 <body>
+  <!-- Header -->
 <header>
-    <nav class="navbar p-4" style="background-color: #42ab49;">
+    <nav class="navbar p-4">
         <div class="container-fluid d-flex justify-content-between">
-            <div class="mx-auto">
+            <div class="mx-auto text-center">
+                <!-- Logo DUNAMIS S.A. -->
                 <a class="navbar-brand text-white">
                     <span class="h1">DUNAMIS S.A.</span>
                 </a>
+                <!-- Enlace Acerca de o -->
+                <div class="mt-1">
+                    <a href="AcercaDe.aspx" class="text-white" style="font-size: 16px;">Acerca de</a>
+                </div>
             </div>
             <button class="btn btn-light" onclick="window.location.href='PantallaLogin.aspx';">Salir</button>
         </div>
     </nav>
 </header>
+
  
-    <!-- ----- -->
-   <div class="container mt-5">
-        <h1 class="text-center mb-4">Pantalla Principal</h1>
+   <!-- Contenedor Principal -->
+    <div class="main-container">
+        <!-- Menú Lateral -->
+        <div class="sidebar">
+            <h2>Menú</h2>
+            <ul class="nav flex-column">
+                <li class="nav-item">
+                    <a href="EvaluacionSolicitudPrestamo.aspx" class="nav-link text-white">Gestionar Evaluación de Solicitudes de Préstamos</a>
+                </li>
 
-        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
-            <!-- Cuadro 1: Evaluar Empleado -->
-            <div class="col">
-                <div class="card card-custom">
-                    <div class="card-body">
-                        <h5 class="card-title">Evaluar Empleado</h5>
-                        <p class="card-text">Accede al formulario para evaluar el desempeño de los empleados.</p>
-                        <a href="evaluar_empleado.html" class="btn btn-light" onclick="window.location.href='EvaluacionEmpleado.aspx'; return false;">Ir a Evaluar</a>
-                    </div>
-                </div>
-            </div>
+                <li class="nav-item">
+                    <a href="EvaluacionEmpleado.aspx" class="nav-link text-white">Consulta de Evaluacion Empleado</a>
+                </li>
 
-            <!-- Cuadro 2: Evaluar Solicitud de Préstamos -->
-            <div class="col">
-                <div class="card card-custom">
-                    <div class="card-body">
-                        <h5 class="card-title">Evaluar Solicitud de Préstamos</h5>
-                        <p class="card-text">Revisa y evalúa las solicitudes de préstamo de los empleados.</p>
-                        <a href="evaluar_solicitud.html" class="btn btn-light" onclick="window.location.href='EvaluacionSolicitudPrestamo.aspx'; return false;">Ir a Evaluar</a>
-                    </div>
-                </div>
-            </div>
+                <li class="nav-item">
+                    <a href="CapacidadPago.aspx" class="nav-link text-white">Evaluar Capacidad de Pago</a>
+                </li>
 
-            <!-- Cuadro 3: Gestionar Saldo de Préstamos -->
-            <div class="col">
-                <div class="card card-custom">
-                    <div class="card-body">
-                        <h5 class="card-title">Gestionar Saldo de Préstamos</h5>
-                        <p class="card-text">Consulta y gestiona los saldos pendientes de los préstamos.</p>
-                        <a href="gestionar_saldo.html" class="btn btn-light" onclick="window.location.href='GestionarSaldoPrestamos.aspx'; return false;">Ir a Gestionar</a>
-                    </div>
-                </div>
-            </div>
+                <li class="nav-item">
+                    <a href="GestionarSaldoPrestamos.aspx" class="nav-link text-white">Gestionar Saldos de Préstamos</a>
+                </li>
 
-            <!-- Cuadro 4: Gestionar Interés de Préstamos -->
-            <div class="col">
-                <div class="card card-custom">
-                    <div class="card-body">
-                        <h5 class="card-title">Gestionar Interés de Préstamos</h5>
-                        <p class="card-text">Controla y ajusta los intereses de los préstamos otorgados.</p>
-                        <a href="gestionar_interes.html" class="btn btn-light" onclick="window.location.href='GestionarInteresPrestamos.aspx'; return false;">Ir a Gestionar</a>
-                    </div>
-                </div>
-            </div>
+                <li class="nav-item">
+                    <a href="GestionarInteresPrestamos.aspx" class="nav-link text-white">Gestionar Cobro de Interéses </a>
+                </li>
 
-            <!-- Cuadro 4: Capacidad de Pago -->
-            <div class="col">
-                <div class="card card-custom">
-                    <div class="card-body">
-                        <h5 class="card-title">Capacidad de Pago</h5>
-                        <p class="card-text">Evalua la capacidad de pago de cada empleado tomando en cuenta su salario bruto.</p>
-                        <a href="capacidad_pago.html" class="btn btn-light" onclick="window.location.href='CapacidadPago.aspx'; return false;">Ir a Gestionar</a>
-                    </div>
-                </div>
-            </div>      
+                <li class="nav-item">
+                    <a href="Reportes.aspx" class="nav-link text-white">Reportes</a>
+                </li>
+            </ul>
+        </div>
 
-            <!-- Cuadro 5: Reportes -->
-            <div class="col">
-                <div class="card card-custom">
-                    <div class="card-body">
-                        <h5 class="card-title">Reportes</h5>
-                        <p class="card-text">Genera y consulta los reportes detallados de la gestión.</p>
-                        <a href="reportes.html" class="btn btn-light" onclick="window.location.href='Reportes.aspx'; return false;">Ir a Reportes</a>
-                    </div>
-                </div>
-            </div>
-
+              <!-- Contenido Principal -->
+        <div class="content">
+            <!-- Imagen en el espacio blanco -->
+            <img src="Recursos/clinica.jpg" alt="Imagen principal" class="img-fluid" >
         </div>
     </div>
 
-     <!-- ------------------>
+
+ <!-- Footer -->
     
       <footer class="bg-light text-dark text-center py-3 mt-5 fixed-bottom bg-body-tertiary">
         <p class="mb-0">2024 DUNAMIS S.A. Todos los derechos reservados</p>
