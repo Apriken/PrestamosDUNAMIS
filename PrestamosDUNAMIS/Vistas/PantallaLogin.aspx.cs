@@ -9,22 +9,30 @@ namespace PrestamosDUNAMIS.Vistas
 
         protected void Page_Load(object sender, EventArgs e)
         {
-
         }
 
         protected void btn_Login_Click(object sender, EventArgs e)
         {
             if (login.LoginLG(txt_correo.Value, txt_contrasena.Value))
             {
-                // Redirigir a la pantalla principal
-                Response.Redirect("PaginaPrincipal.aspx");
+                int idPerfil = login.ObtenerIdPerfil(txt_correo.Value);
+                if (idPerfil != 0)
+                {
+                    Session["idPerfil"] = idPerfil;
+                    Response.Redirect("PaginaPrincipal.aspx");
+                }
+                else
+                {
+                    string script = "alert('Error al obtener el perfil. Inténtalo de nuevo.');";
+                    ClientScript.RegisterStartupScript(this.GetType(), "alert", script, true);
+                }
             }
             else
             {
-                //Muestra alerta JS
                 string script = "alert('Credenciales incorrectas. Inténtalo de nuevo.');";
                 ClientScript.RegisterStartupScript(this.GetType(), "alert", script, true);
             }
         }
+
     }
 }
