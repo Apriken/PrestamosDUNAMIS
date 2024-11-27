@@ -99,30 +99,35 @@
         <div class="sidebar">
             <h2>Menú</h2>
             <ul class="nav flex-column">
-                <li class="nav-item">
-                    <a href="EvaluacionSolicitudPrestamo.aspx" class="nav-link text-white">Gestionar Evaluación de Solicitudes de Préstamos</a>
-                </li>
-
-                <li class="nav-item">
-                    <a href="EvaluacionEmpleado.aspx" class="nav-link text-white">Consulta de Evaluacion Empleado</a>
-                </li>
-
-                <li class="nav-item">
-                    <a href="CapacidadPago.aspx" class="nav-link text-white">Evaluar Capacidad de Pago</a>
-                </li>
-
-                <li class="nav-item">
-                    <a href="GestionarSaldoPrestamos.aspx" class="nav-link text-white">Gestionar Saldos de Préstamos</a>
-                </li>
-
-                <li class="nav-item">
-                    <a href="GestionarInteresPrestamos.aspx" class="nav-link text-white">Gestionar Cobro de Interéses </a>
-                </li>
-
-                <li class="nav-item">
-                    <a href="Reportes.aspx" class="nav-link text-white">Reportes</a>
-                </li>
-            </ul>
+    <li class="nav-item" id="liEvaluacionSolicitud" runat="server">
+        <a href="EvaluacionSolicitudPrestamo.aspx" class="nav-link text-white">
+            Gestionar Evaluación de Solicitudes de Préstamos
+        </a>
+    </li>
+    <li class="nav-item" id="liEvaluacionEmpleado" runat="server">
+        <a href="EvaluacionEmpleado.aspx" class="nav-link text-white">
+            Consulta de Evaluación Empleado
+        </a>
+    </li>
+    <li class="nav-item" id="liCapacidadPago" runat="server">
+        <a href="CapacidadPago.aspx" class="nav-link text-white">
+            Evaluar Capacidad de Pago
+        </a>
+    </li>
+    <li class="nav-item" id="liGestionarSaldo" runat="server">
+        <a href="GestionarSaldoPrestamos.aspx" class="nav-link text-white">
+            Gestionar Saldos de Préstamos
+        </a>
+    </li>
+    <li class="nav-item" id="liGestionarInteres" runat="server">
+        <a href="GestionarInteresPrestamos.aspx" class="nav-link text-white">
+            Gestionar Cobro de Intereses
+        </a>
+    </li>
+    <li class="nav-item" id="liReportes" runat="server">
+        <a href="Reportes.aspx" class="nav-link text-white">Reportes</a>
+    </li>
+</ul>
         </div>
 
               <!-- Contenido Principal -->

@@ -10,5 +10,11 @@ namespace PrestamosDUNAMIS.Controladores
         {
             return loginbd.Login(correo, clave);
         }
+
+        public int ObtenerIdPerfil(string correo)
+        {
+            return loginbd.ObtenerIdPerfilBD(correo); // Nueva función para obtener idPerfil
+        }
+
     }
 }

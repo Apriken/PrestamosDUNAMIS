@@ -8,39 +8,47 @@ namespace PrestamosDUNAMIS.BaseDatos
     {
         public bool Login(string correo, string clave)
         {
-            // Consulta SQL para leer datos
             string query = "SELECT 1 FROM dbo.Empleado WHERE Correo_Organizacional = @Correo AND Clave_Usuario = @Clave";
 
             using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["cnx"].ToString()))
             {
                 SqlCommand command = new SqlCommand(query, connection);
-
-                // Agregar parámetros
                 command.Parameters.AddWithValue("@Correo", correo);
                 command.Parameters.AddWithValue("@Clave", clave);
 
                 try
                 {
                     connection.Open();
-                    command.ExecuteNonQuery();
-
-                    using (var reader = command.ExecuteReader())
-                    {
-                        if (reader.Read())
-                        {
-                            return true;
-                        }
-                        else
-                        {
-                            return false;
-                        }
-                    }
+                    return command.ExecuteScalar() != null;
                 }
-                catch (Exception)
+                catch
                 {
                     return false;
                 }
             }
         }
+
+        public int ObtenerIdPerfilBD(string correo)
+        {
+            string query = "SELECT idPerfil FROM dbo.Empleado WHERE Correo_Organizacional = @Correo";
+
+            using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["cnx"].ToString()))
+            {
+                SqlCommand command = new SqlCommand(query, connection);
+                command.Parameters.AddWithValue("@Correo", correo);
+
+                try
+                {
+                    connection.Open();
+                    object result = command.ExecuteScalar();
+                    return result != null ? Convert.ToInt32(result) : 0;
+                }
+                catch
+                {
+                    return 0;
+                }
+            }
+        }
+
     }
 }
