@@ -10,17 +10,24 @@ namespace PrestamosDUNAMIS.BaseDatos
 {
     public class EvaluacionBD
     {
-        public List<Empleado> cargaComboEmpleados()
+        public List<Empleado> cargaComboEmpleados(int idPerfil, int? idEmpleado)
         {
             List<Empleado> listaEmpleados = new List<Empleado>();
 
+            StringBuilder query = new StringBuilder();
+
             // Consulta SQL para leer datos
-            string query = "SELECT idEmpleado, Nombre FROM dbo.Empleado";
+            query.AppendLine("SELECT idEmpleado, Nombre FROM dbo.Empleado");
+
+            if (idPerfil == 1)
+            {
+                query.AppendLine("WHERE idEmpleado = " + idEmpleado);
+            }
 
 
             using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["cnx"].ToString()))
             {
-                SqlCommand command = new SqlCommand(query, connection);
+                SqlCommand command = new SqlCommand(query.ToString(), connection);
 
                 try
                 {
@@ -98,38 +105,38 @@ namespace PrestamosDUNAMIS.BaseDatos
                                "FROM Evaluacion " +
                                "WHERE Fecha_Evaluacion = '" + fechaDt + "' AND idEmpleado = " + Id;
 
-                using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["cnx"].ToString()))
-                {
-                    SqlCommand command = new SqlCommand(query, connection);
+            using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["cnx"].ToString()))
+            {
+                SqlCommand command = new SqlCommand(query, connection);
 
-                    try
+                try
+                {
+                    connection.Open();
+                    using (var reader = command.ExecuteReader())
                     {
-                        connection.Open();
-                        using (var reader = command.ExecuteReader())
+                        if (reader.Read()) // Verifica si se encuentran datos
                         {
-                            if (reader.Read()) // Verifica si se encuentran datos
+                            return new Evaluacion
                             {
-                                return new Evaluacion
-                                {
-                                    Rendimiento = Convert.ToDouble(reader["Rendimiento"]),
-                                    Puntualidad = Convert.ToDouble(reader["Puntualidad"]),
-                                    Productividad = Convert.ToDouble(reader["Productividad"]),
-                                    Orden = Convert.ToDouble(reader["Orden"])
-                                };
-                            }
-                            else
-                            {
-                                return null;
-                            }
+                                Rendimiento = Convert.ToDouble(reader["Rendimiento"]),
+                                Puntualidad = Convert.ToDouble(reader["Puntualidad"]),
+                                Productividad = Convert.ToDouble(reader["Productividad"]),
+                                Orden = Convert.ToDouble(reader["Orden"])
+                            };
+                        }
+                        else
+                        {
+                            return null;
                         }
                     }
-                    catch (Exception ex)
-                    {
-                        return null;
-                    }
                 }
-            
-            
+                catch (Exception ex)
+                {
+                    return null;
+                }
+            }
+
+
         }
 
         /*public string InsertaEvaluacion(Evaluacion input)
