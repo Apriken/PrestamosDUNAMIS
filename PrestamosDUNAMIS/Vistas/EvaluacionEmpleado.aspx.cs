@@ -4,6 +4,7 @@ using PrestamosDUNAMIS.Modelos;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Web;
 using System.Web.UI.WebControls;
 
 namespace PrestamosDUNAMIS.Vistas
@@ -50,8 +51,10 @@ namespace PrestamosDUNAMIS.Vistas
 
         private void CargarEmpleadosEnDropDownList()
         {
+            int idPerfil = ObtenerIdPerfil();
+
             // Llama al método que carga los empleados
-            List<Empleado> empleados = evaluacionL.cargaComboEmpleadosL();
+            List<Empleado> empleados = evaluacionL.cargaComboEmpleadosL(idPerfil);
 
             // Asigna la lista al DropDownList
             ddlEmpleado.DataSource = empleados;
@@ -59,8 +62,14 @@ namespace PrestamosDUNAMIS.Vistas
             ddlEmpleado.DataValueField = "IdEmpleado"; // Campo que será el valor del DropDownList
             ddlEmpleado.DataBind();
 
-            // Opcional: Agregar un elemento por defecto
-            ddlEmpleado.Items.Insert(0, new ListItem("Seleccione un empleado", "0"));
+            if (idPerfil == 1)
+            {
+                ddlEmpleado.Enabled = false;      
+            }
+            else
+            {
+                ddlEmpleado.Items.Insert(0, new ListItem("Seleccione un empleado", "0"));
+            }
         }
 
         private void cargarFechasEvaluacionEnDropDownList(int id)
@@ -90,6 +99,19 @@ namespace PrestamosDUNAMIS.Vistas
                 txt_puntualidad.Value = input.Puntualidad.ToString();
                 txt_produccion.Value = input.Productividad.ToString();
                 txt_orden.Value = input.Orden.ToString();
+            }
+        }
+
+
+        private int ObtenerIdPerfil()
+        {
+            if (HttpContext.Current.Session["idPerfil"] != null)
+            {
+                return (int)HttpContext.Current.Session["idPerfil"];
+            }
+            else
+            {
+                throw new Exception("La sesión no contiene 'idPerfil'.");
             }
         }
 

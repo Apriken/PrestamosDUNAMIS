@@ -10,15 +10,20 @@
 </head>
 <body>
 
-    <header>
-        <nav class="navbar p-4" style="background-color: #42ab49;">
-            <div class="container-fluid d-flex justify-content-center">
-                <a class="navbar-brand text-white">
-                    <span class="h1">DUNAMIS S.A.</span>
-                </a>
-            </div>
-        </nav>
-    </header>
+<header>
+    <nav class="navbar p-4" style="background-color: #42ab49; position: relative;">
+        <div class="container-fluid d-flex justify-content-center">
+            <a class="navbar-brand text-white">
+                <span class="h1">DUNAMIS S.A.</span>
+            </a>
+        </div>
+        <!-- Botón movido a la derecha -->
+        <button class="btn btn-light" style="position: absolute; right: 20px;" onclick="window.location.href='PaginaPrincipal.aspx';">
+            Volver al menú principal
+        </button>
+    </nav>
+</header>
+
 
 
 

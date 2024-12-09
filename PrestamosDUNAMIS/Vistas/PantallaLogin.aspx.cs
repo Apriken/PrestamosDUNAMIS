@@ -1,4 +1,5 @@
 ﻿using PrestamosDUNAMIS.Controladores;
+using PrestamosDUNAMIS.Modelos;
 using System;
 
 namespace PrestamosDUNAMIS.Vistas
@@ -13,19 +14,13 @@ namespace PrestamosDUNAMIS.Vistas
 
         protected void btn_Login_Click(object sender, EventArgs e)
         {
-            if (login.LoginLG(txt_correo.Value, txt_contrasena.Value))
+            Empleado empleado = login.LoginLG(txt_correo.Value, txt_contrasena.Value);
+
+            if (empleado != null)
             {
-                int idPerfil = login.ObtenerIdPerfil(txt_correo.Value);
-                if (idPerfil != 0)
-                {
-                    Session["idPerfil"] = idPerfil;
-                    Response.Redirect("PaginaPrincipal.aspx");
-                }
-                else
-                {
-                    string script = "alert('Error al obtener el perfil. Inténtalo de nuevo.');";
-                    ClientScript.RegisterStartupScript(this.GetType(), "alert", script, true);
-                }
+                Session["idEmpleado"] = empleado.IdEmpleado;
+                Session["idPerfil"] = empleado.IdPerfil;
+                Response.Redirect("PaginaPrincipal.aspx");
             }
             else
             {
