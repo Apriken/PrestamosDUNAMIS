@@ -1,139 +1,134 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="CapacidadPago.aspx.cs" Inherits="PrestamosDUNAMIS.CapacidadPago" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="GestionarSaldoPrestamos.aspx.cs" Inherits="PrestamosDUNAMIS.Vistas.GestionarSaldoPrestamos" %>
 
 <!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Capacidad de Pago - DUNAMIS S.A.</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Gestionar Saldo de Préstamos</title>
+
     <style>
-        body {
-            background: #f4fdf4;
-            font-family: Arial, sans-serif;
+        :root {
+            --verde-oscuro: #42ab49;
+            --text-color: #2F4F4F;
         }
+
         header {
-            background-color: #42ab49;
-            color: white;
-            padding: 2rem 0;
+            height: 100px;
+            background-color: var(--verde-oscuro);
+            margin-bottom: 20px;
+        }
+
+        .title {
+            color: var(--verde-oscuro);
             text-align: center;
-        }
-        header h1 {
-            margin: 0;
-            font-size: 2.5rem;
             font-weight: bold;
+            margin-top: 20px;
+            margin-bottom: 30px;
         }
-        header h2 {
-            margin: 0;
-            font-size: 1.5rem;
-            font-weight: 300;
-        }
-        .container {
-            max-width: 600px;
-            margin: 2rem auto;
-            background: white;
-            padding: 2rem;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-        }
-        .form-group label {
-            font-weight: bold;
-            color: #5ac15d;
-        }
-        .form-group input {
-            background: #c7f1c2;
-            border: 1px solid #a3b18a;
-            border-radius: 5px;
-            transition: all 0.3s ease;
-        }
-        .form-group input:focus {
-            outline: none;
-            border-color: #5ac15d;
-            box-shadow: 0 0 5px #5ac15d;
-        }
-        .button {
-            background: #5ac15d;
-            color: white;
-            font-weight: bold;
-            border: none;
-            border-radius: 5px;
-            padding: 0.8rem;
-            cursor: pointer;
-            transition: background 0.3s ease;
-        }
-        .button:hover {
-            background: #42ab49;
-        }
-        .result {
-            margin-top: 1.5rem;
-            padding: 1rem;
-            background: #f4fdf4;
-            border-left: 5px solid #42ab49;
-            border-radius: 5px;
-        }
-        .progress {
-            height: 20px;
-            background: #e9ecef;
-            border-radius: 10px;
-            overflow: hidden;
-        }
-        .progress-bar {
-            background: #5ac15d;
-            height: 100%;
-            line-height: 20px;
+
+        .buttons-container {
             text-align: center;
-            color: white;
+            margin-top: 30px;
+            margin-bottom: 30px;
         }
+
+        .btn-custom {
+            background-color: #c7f1c2;
+            color: var(--text-color);
+            border: 1px solid #42ab49;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-custom:hover {
+            background-color: #b2e5ae;
+            color: var(--text-color);
+        }
+
+        .form-container {
+            margin-top: 30px;
+            margin-bottom: 30px;
+        }
+
         footer {
-            background-color: #f8f9fa;
-            color: #333;
+            flex-shrink: 0;
+            height: 50px;
         }
     </style>
 </head>
 <body>
+    <form id="form1" runat="server">
+        <header>
+            <nav class="navbar p-4">
+                <div class="container-fluid d-flex justify-content-center">
+                    <a class="navbar-brand text-white">
+                        <span class="h1">DUNAMIS S.A.</span>
+                    </a>
+                </div>
+            </nav>
+        </header>
 
-    <header>
-        <h1>DUNAMIS S.A.</h1>
-        <h2>Capacidad de Pago</h2>
-    </header>
-
-    <main>
         <div class="container">
-            <form id="CapacidadPagoForm" runat="server">
-                <div class="form-group mb-3">
-                    <label for="SalarioBrutoInput">Salario Bruto:</label>
-                    <asp:TextBox ID="SalarioBrutoInput" runat="server" CssClass="form-control" TextMode="Number"></asp:TextBox>
+            <h1 class="title">Gestionar Saldo de Préstamos</h1>
+            
+            <asp:Label ID="lblMessage" runat="server" CssClass="text-success"></asp:Label>
+
+            <div class="form-container">
+                <div class="mb-3">
+                    <label for="txtMonto" class="form-label">Monto</label>
+                    <asp:TextBox ID="txtMonto" runat="server" CssClass="form-control" />
                 </div>
-                <div class="form-group mb-3">
-                    <label for="DeduccionesInput">Deducciones:</label>
-                    <asp:TextBox ID="DeduccionesInput" runat="server" CssClass="form-control" TextMode="Number"></asp:TextBox>
+
+                <div class="mb-3">
+                    <label for="txtFechaPago" class="form-label">Fecha de Pago</label>
+                    <asp:TextBox ID="txtFechaPago" runat="server" CssClass="form-control" TextMode="Date" />
                 </div>
-                <asp:Button ID="CalcularCapacidadPago" runat="server" Text="Calcular" CssClass="button w-100" OnClick="CalcularCapacidadPago_Click" />
-            </form>
-            <asp:Panel ID="ResultadosPanel" runat="server" CssClass="result mt-4" Visible="false">
-                <p><strong>Cargas Sociales:</strong> <asp:Label ID="CargasSocialesLabel" runat="server" /></p>
-                <p><strong>Rebajo por Deducciones:</strong> <asp:Label ID="DeduccionesRebajoLabel" runat="server" /></p>
-                <p><strong>Salario Neto:</strong> <asp:Label ID="SalarioNetoLabel" runat="server" /></p>
-                <p><strong>Capacidad de Pago:</strong> <asp:Label ID="CapacidadPagoLabel" runat="server" /></p>
-                <div class="progress mt-3">
-                    <div id="ProgressBar" class="progress-bar" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">0%</div>
+
+                <div class="mb-3">
+                    <label for="ddlPrestamo" class="form-label">Préstamo</label>
+                    <asp:DropDownList ID="ddlPrestamo" runat="server" CssClass="form-select"></asp:DropDownList>
                 </div>
-            </asp:Panel>
+
+                <div class="mb-3">
+                    <label for="txtSaldoPendiente" class="form-label">Saldo Pendiente</label>
+                    <asp:TextBox ID="txtSaldoPendiente" runat="server" CssClass="form-control" />
+                </div>
+
+                <div class="mb-3">
+                    <label for="chkPagoRealizado" class="form-label">Pago Realizado</label>
+                    <asp:CheckBox ID="chkPagoRealizado" runat="server" CssClass="form-check-input" />
+                </div>
+
+                <div class="buttons-container">
+                    <asp:Button ID="btnGuardar" runat="server" Text="Guardar" CssClass="btn btn-success btn-custom" OnClick="btnGuardar_Click" />
+                    <asp:Button ID="btnLimpiar" runat="server" Text="Limpiar" CssClass="btn btn-secondary btn-custom" OnClick="btnLimpiar_Click" />
+                </div>
+            </div>
+
+            <!-- GridView -->
+            <hr />
+            <h2 class="text-center mb-4">Pagos Realizados</h2>
+
+            <asp:GridView ID="gvPagos" runat="server" CssClass="table table-bordered mt-4" AutoGenerateColumns="False" DataKeyNames="idPago_Prestamo" OnRowEditing="gvPagos_RowEditing" OnRowCancelingEdit="gvPagos_RowCancelingEdit" OnRowDeleting="gvPagos_RowDeleting" OnDataBound="gvPagos_DataBound">
+                <Columns>
+                    <asp:BoundField DataField="idPago_Prestamo" HeaderText="ID Pago" ReadOnly="True" />
+                    <asp:BoundField DataField="Monto_Pago" HeaderText="Monto Pago" DataFormatString="{0:C}" />
+                    <asp:BoundField DataField="Saldo_Pendiente" HeaderText="Saldo Pendiente" DataFormatString="{0:C}" />
+                    <asp:BoundField DataField="Abono" HeaderText="Abono" DataFormatString="{0:C}" />
+                    <asp:CommandField ShowEditButton="True" ShowDeleteButton="True" />
+                </Columns>
+                <FooterStyle BackColor="#f2f2f2" Font-Bold="True" />
+                <FooterTemplate>
+                    <asp:Label ID="lblTotalSaldo" runat="server" Text="₡0.00" />
+                </FooterTemplate>
+            </asp:GridView>
         </div>
-    </main>
 
-    <footer class="text-center py-3 mt-5">
-        <p class="mb-0">2024 DUNAMIS S.A. Todos los derechos reservados</p>
-    </footer>
+        <footer class="bg-light text-dark text-center py-3 mt-5 fixed-bottom bg-body-tertiary">
+            <p class="mb-0">2024 DUNAMIS S.A. Todos los derechos reservados</p>
+        </footer>
+    </form>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+AMxrHkqF4aQ0wPCpJ7euNsFZ6p6k" crossorigin="anonymous"></script>
-    <script>
-        // Controla la barra de progreso (puede ser manejada desde el servidor también)
-        function actualizarProgreso(valor) {
-            const progressBar = document.getElementById("ProgressBar");
-            progressBar.style.width = valor + "%";
-            progressBar.textContent = valor + "%";
-        }
-    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
 </html>
