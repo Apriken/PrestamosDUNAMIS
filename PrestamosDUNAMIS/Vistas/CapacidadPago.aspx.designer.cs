@@ -7,65 +7,92 @@
 // </generado automáticamente>
 //------------------------------------------------------------------------------
 
-namespace PrestamosDUNAMIS.Vistas
+namespace PrestamosDUNAMIS
 {
 
 
-    public partial class EvaluacionEmpleado
+    public partial class CapacidadPago
     {
 
         /// <summary>
-        /// Control ddlEmpleado.
+        /// Control CapacidadPagoForm.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlEmpleado;
+        protected global::System.Web.UI.HtmlControls.HtmlForm CapacidadPagoForm;
 
         /// <summary>
-        /// Control ddlEvaluacionFecha.
+        /// Control SalarioBrutoInput.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlEvaluacionFecha;
+        protected global::System.Web.UI.WebControls.TextBox SalarioBrutoInput;
 
         /// <summary>
-        /// Control txt_rendimiento.
+        /// Control DeduccionesInput.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl txt_rendimiento;
+        protected global::System.Web.UI.WebControls.TextBox DeduccionesInput;
 
         /// <summary>
-        /// Control txt_puntualidad.
+        /// Control CalcularCapacidadPago.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl txt_puntualidad;
+        protected global::System.Web.UI.WebControls.Button CalcularCapacidadPago;
 
         /// <summary>
-        /// Control txt_produccion.
+        /// Control ResultadosPanel.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl txt_produccion;
+        protected global::System.Web.UI.WebControls.Panel ResultadosPanel;
 
         /// <summary>
-        /// Control txt_orden.
+        /// Control CargasSocialesLabel.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl txt_orden;
+        protected global::System.Web.UI.WebControls.Label CargasSocialesLabel;
+
+        /// <summary>
+        /// Control DeduccionesRebajoLabel.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label DeduccionesRebajoLabel;
+
+        /// <summary>
+        /// Control SalarioNetoLabel.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label SalarioNetoLabel;
+
+        /// <summary>
+        /// Control CapacidadPagoLabel.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label CapacidadPagoLabel;
     }
 }

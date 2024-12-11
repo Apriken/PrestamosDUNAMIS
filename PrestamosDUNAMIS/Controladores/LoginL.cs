@@ -1,4 +1,5 @@
 ﻿using PrestamosDUNAMIS.BaseDatos;
+using PrestamosDUNAMIS.Modelos;
 
 namespace PrestamosDUNAMIS.Controladores
 {
@@ -6,7 +7,7 @@ namespace PrestamosDUNAMIS.Controladores
     {
         LoginBD loginbd = new LoginBD();
 
-        public bool LoginLG(string correo, string clave)
+        public Empleado LoginLG(string correo, string clave)
         {
             return loginbd.Login(correo, clave);
         }

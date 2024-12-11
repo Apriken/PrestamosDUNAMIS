@@ -11,7 +11,42 @@ namespace PrestamosDUNAMIS.Vistas
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (!IsPostBack)
+            {
+                if (Session["idPerfil"] == null)
+                {
+                    Response.Redirect("PantallaLogin.aspx");
+                }
+                else
+                {
+                    int idPerfil = (int)Session["idPerfil"];
 
+                    // Controla la visibilidad del menú según idPerfil
+                    switch (idPerfil)
+                    {
+                        case 2: // Administrador
+                                // Todos los elementos visibles, no ocultes nada
+                            break;
+                        case 4: // Finanzas
+                            liEvaluacionEmpleado.Visible = false;
+                            liCapacidadPago.Visible = false;
+                            break;
+                        case 3: // Recursos Humanos
+                            liGestionarSaldo.Visible = false;
+                            liGestionarInteres.Visible = false;
+                            break;
+                        case 1: // Otros perfiles
+                            liReportes.Visible = false;
+                            break;
+                        default:
+                            // Perfil desconocido: redirigir
+                            Response.Redirect("PantallaLogin.aspx");
+                            break;
+                    }
+                }
+            }
         }
+
+
     }
 }

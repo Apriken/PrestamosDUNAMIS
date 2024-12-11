@@ -3,6 +3,8 @@ using PrestamosDUNAMIS.Controladores;
 using PrestamosDUNAMIS.Modelos;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
+using System.Web;
 using System.Web.UI.WebControls;
 
 namespace PrestamosDUNAMIS.Vistas
@@ -12,7 +14,6 @@ namespace PrestamosDUNAMIS.Vistas
         #region VARIABLES GLOBALES
 
         EvaluacionL evaluacionL = new EvaluacionL();
-        Evaluacion evaluacion = new Evaluacion();
 
         #endregion
 
@@ -24,28 +25,23 @@ namespace PrestamosDUNAMIS.Vistas
             if (!IsPostBack)
             {
                 CargarEmpleadosEnDropDownList();
+                cargarFechasEvaluacionEnDropDownList(Convert.ToInt32(ddlEmpleado.SelectedValue));
             }
         }
 
-        protected void btn_evaluar_Click(object sender, EventArgs e)
+        protected void ddlEmpleado_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (Convert.ToInt32(ddlEmpleado.SelectedValue) == 0)
+            cargarFechasEvaluacionEnDropDownList(Convert.ToInt32(ddlEmpleado.SelectedValue));
+
+            if (!(ddlEvaluacionFecha.SelectedValue == null || String.IsNullOrEmpty(ddlEvaluacionFecha.SelectedValue)))
             {
-                // Manejo de error: No se ha seleccionado un empleado
-                //Muestra alerta JS
-                alertJS("Debe de escoger un Empleado!");
-                return;
+                cargaInfo(evaluacionL.cargarEvaluacionL(ddlEvaluacionFecha.SelectedValue, Convert.ToInt32(ddlEmpleado.SelectedValue)));
             }
+        }
 
-            evaluacion.IdEmpleado = Convert.ToInt32(ddlEmpleado.SelectedValue);
-            evaluacion.Fecha_Evaluacion = Convert.ToDateTime(txt_fechaEvaluacion.Value);
-            evaluacion.Rendimiento = Convert.ToDouble(txt_rendimiento.Value);
-            evaluacion.Puntualidad = Convert.ToDouble(txt_puntualidad.Value);
-            evaluacion.Productividad = Convert.ToDouble(txt_produccion.Value);
-            evaluacion.Orden = Convert.ToDouble(txt_orden.Value);
-
-            alertJS(evaluacionL.InsertaEvaluacion(evaluacion));
-            limpiar();
+        protected void ddlEvaluacionFecha_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            cargaInfo(evaluacionL.cargarEvaluacionL(ddlEvaluacionFecha.SelectedValue, Convert.ToInt32(ddlEmpleado.SelectedValue)));
         }
 
         #endregion
@@ -55,8 +51,10 @@ namespace PrestamosDUNAMIS.Vistas
 
         private void CargarEmpleadosEnDropDownList()
         {
+            int idPerfil = ObtenerIdPerfil();
+
             // Llama al método que carga los empleados
-            List<Empleado> empleados = evaluacionL.cargaComboEmpleadosL();
+            List<Empleado> empleados = evaluacionL.cargaComboEmpleadosL(idPerfil);
 
             // Asigna la lista al DropDownList
             ddlEmpleado.DataSource = empleados;
@@ -64,24 +62,57 @@ namespace PrestamosDUNAMIS.Vistas
             ddlEmpleado.DataValueField = "IdEmpleado"; // Campo que será el valor del DropDownList
             ddlEmpleado.DataBind();
 
-            // Opcional: Agregar un elemento por defecto
-            ddlEmpleado.Items.Insert(0, new ListItem("Seleccione un empleado", "0"));
+            if (idPerfil == 1)
+            {
+                ddlEmpleado.Enabled = false;      
+            }
+            else
+            {
+                ddlEmpleado.Items.Insert(0, new ListItem("Seleccione un empleado", "0"));
+            }
         }
 
-        private void alertJS(string msj)
+        private void cargarFechasEvaluacionEnDropDownList(int id)
         {
-            //Muestra alerta JS
-            ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('" + msj + "');", true);
+            List<DateTime> listaFechas = evaluacionL.cargaComboEvaluacionFechaL(id);
+
+            // Lista para mostrar la fecha bonita
+            List<string> listaFechasFormateadas = new List<string>();
+
+            // Formatear las fechas
+            foreach (DateTime fecha in listaFechas)
+            {
+                // Formatear la fecha usando la cultura española
+                listaFechasFormateadas.Add((fecha.ToString("D", new CultureInfo("es-ES"))));
+            }
+
+            // Configurar el DropDownList
+            ddlEvaluacionFecha.DataSource = listaFechasFormateadas;
+            ddlEvaluacionFecha.DataBind();
         }
 
-        private void limpiar()
+        private void cargaInfo(Evaluacion input)
         {
-            ddlEmpleado.SelectedIndex = 0;
-            txt_fechaEvaluacion.Value = string.Empty;
-            txt_rendimiento.Value = string.Empty;
-            txt_puntualidad.Value = string.Empty;
-            txt_produccion.Value = string.Empty;
-            txt_orden.Value = string.Empty;
+            if (!(input == null))
+            {
+                txt_rendimiento.Value = input.Rendimiento.ToString();
+                txt_puntualidad.Value = input.Puntualidad.ToString();
+                txt_produccion.Value = input.Productividad.ToString();
+                txt_orden.Value = input.Orden.ToString();
+            }
+        }
+
+
+        private int ObtenerIdPerfil()
+        {
+            if (HttpContext.Current.Session["idPerfil"] != null)
+            {
+                return (int)HttpContext.Current.Session["idPerfil"];
+            }
+            else
+            {
+                throw new Exception("La sesión no contiene 'idPerfil'.");
+            }
         }
 
         #endregion
