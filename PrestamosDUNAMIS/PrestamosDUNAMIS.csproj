@@ -86,6 +86,7 @@
     <Compile Include="Controladores\EvaluacionL.cs" />
     <Compile Include="Controladores\CapacidadPagoModel.cs" />
     <Compile Include="Controladores\LoginL.cs" />
+    <Compile Include="Controladores\Test.cs" />
     <Compile Include="Modelos\CapacidadPago.aspx.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
