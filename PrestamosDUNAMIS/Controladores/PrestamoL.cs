@@ -11,4 +11,5 @@ namespace PrestamosDUNAMIS.Controladores
             return prestamoBD.RegistrarPrestamo(idEmpleado, monto, plazos, interes);
         }
     }
+
 }

@@ -59,4 +59,5 @@ namespace PrestamosDUNAMIS.Vistas
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnRegistrar;
     }
+
 }
