@@ -11,7 +11,7 @@ namespace PrestamosDUNAMIS.Vistas
 {
 
 
-    public partial class GestionarInteresPrestamo
+    public partial class GestionarPrestamos
     {
 
         /// <summary>
@@ -59,4 +59,5 @@ namespace PrestamosDUNAMIS.Vistas
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnRegistrar;
     }
+
 }
