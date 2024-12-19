@@ -73,6 +73,7 @@
     <Content Include="Vistas\EvaluacionEmpleado.aspx" />
     <Content Include="Vistas\EvaluacionSolicitudPrestamo.aspx" />
     <Content Include="Vistas\GestionarInteresPrestamos.aspx" />
+    <Content Include="Vistas\GestionarPrestamos.aspx" />
     <Content Include="Vistas\GestionarSaldoPrestamos.aspx" />
     <Content Include="Vistas\PaginaPrincipal.aspx" />
     <Content Include="Vistas\PantallaLogin.aspx" />
@@ -83,10 +84,11 @@
   <ItemGroup>
     <Compile Include="BaseDatos\EvaluacionBD.cs" />
     <Compile Include="BaseDatos\LoginBD.cs" />
+    <Compile Include="BaseDatos\PrestamoBD.cs" />
     <Compile Include="Controladores\EvaluacionL.cs" />
     <Compile Include="Controladores\CapacidadPagoModel.cs" />
     <Compile Include="Controladores\LoginL.cs" />
-    <Compile Include="Controladores\Test.cs" />
+    <Compile Include="Controladores\PrestamoL.cs" />
     <Compile Include="Modelos\CapacidadPago.aspx.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
@@ -134,6 +136,13 @@
     </Compile>
     <Compile Include="Vistas\GestionarInteresPrestamos.aspx.designer.cs">
       <DependentUpon>GestionarInteresPrestamos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Vistas\GestionarPrestamos.aspx.cs">
+      <DependentUpon>GestionarPrestamos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Vistas\GestionarPrestamos.aspx.designer.cs">
+      <DependentUpon>GestionarPrestamos.aspx</DependentUpon>
     </Compile>
     <Compile Include="Vistas\GestionarSaldoPrestamos.aspx.cs">
       <DependentUpon>GestionarSaldoPrestamos.aspx</DependentUpon>

@@ -11,7 +11,7 @@ namespace PrestamosDUNAMIS.Vistas
 {
 
 
-    public partial class GestionarInteresPrestamo
+    public partial class GestionarPrestamos
     {
 
         /// <summary>
