@@ -1,11 +1,11 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="GestionarPrestamos.aspx.cs" Inherits="PrestamosDUNAMIS.Vistas.GestionarPrestamos" %>
 
 <!DOCTYPE html>
-
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title></title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Registrar Préstamo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
 </head>
 <body>
     <header>
@@ -17,31 +17,32 @@
             </div>
         </nav>
     </header>
-
-        <form id="form1" runat="server">
-        <div>
-            <label>Empleado:</label>
-            <asp:DropDownList ID="ddlEmpleado" runat="server"></asp:DropDownList>
-            <br />
-            <label>Monto:</label>
-            <asp:TextBox ID="txtMonto" runat="server"></asp:TextBox>
-            <br />
-            <label>Plazos:</label>
-            <asp:TextBox ID="txtPlazos" runat="server"></asp:TextBox>
-            <br />
-            <asp:Button ID="btnRegistrar" runat="server" Text="Registrar" OnClick="btnRegistrar_Click" />
+    <div class="container mt-5">
+        <div class="card p-4">
+            <h3 class="text-center mb-4">Registrar Préstamo</h3>
+            <form id="form1" runat="server">
+                <div class="mb-3">
+                    <label for="ddlEmpleado" class="form-label">Empleado:</label>
+                    <asp:DropDownList ID="ddlEmpleado" runat="server" CssClass="form-select"></asp:DropDownList>
+                </div>
+                <div class="mb-3">
+                    <label for="txtMonto" class="form-label">Monto:</label>
+                    <asp:TextBox ID="txtMonto" runat="server" CssClass="form-control"></asp:TextBox>
+                </div>
+                <div class="mb-3">
+                    <label for="txtPlazos" class="form-label">Plazos:</label>
+                    <asp:TextBox ID="txtPlazos" runat="server" CssClass="form-control"></asp:TextBox>
+                </div>
+                <div class="d-flex justify-content-between">
+                    <asp:Button ID="btnRegistrar" runat="server" CssClass="btn btn-success" Text="Registrar" OnClick="btnRegistrar_Click" />
+                    <asp:Button ID="btnLimpiar" runat="server" CssClass="btn btn-secondary" Text="Limpiar" OnClick="btnLimpiar_Click" />
+                </div>
+            </form>
         </div>
-    </form>
-
-    
-    <h1 class="text-center mb-4">Gestionar Prestamos</h1>
-    
-      <footer class="bg-light text-dark text-center py-3 mt-5 fixed-bottom bg-body-tertiary">
-        <p class="mb-0">2024 DUNAMIS S.A. Todos los derechos reservados</p>
+    </div>
+    <footer class="text-center mt-5">
+        <p>&copy; 2024 DUNAMIS S.A. Todos los derechos reservados</p>
     </footer>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-
-
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
