@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
 using System.Web.UI.WebControls;
 using PrestamosDUNAMIS.Controladores;
 using PrestamosDUNAMIS.Modelos;
@@ -17,12 +13,17 @@ namespace PrestamosDUNAMIS.Vistas
         {
             if (!IsPostBack)
             {
-                // Cargar empleados
-                ddlEmpleado.DataSource = ObtenerEmpleados();
-                ddlEmpleado.DataTextField = "Nombre";
-                ddlEmpleado.DataValueField = "idEmpleado";
-                ddlEmpleado.DataBind();
+                CargarEmpleados();
             }
+        }
+
+        private void CargarEmpleados()
+        {
+            ddlEmpleado.DataSource = prestamoL.ObtenerEmpleados();
+            ddlEmpleado.DataTextField = "Nombre";
+            ddlEmpleado.DataValueField = "IdEmpleado";
+            ddlEmpleado.DataBind();
+            ddlEmpleado.Items.Insert(0, new ListItem("-- Seleccione un empleado --", "0"));
         }
 
         protected void btnRegistrar_Click(object sender, EventArgs e)
@@ -30,8 +31,9 @@ namespace PrestamosDUNAMIS.Vistas
             int idEmpleado = int.Parse(ddlEmpleado.SelectedValue);
             decimal monto = decimal.Parse(txtMonto.Text);
             int plazos = int.Parse(txtPlazos.Text);
+            decimal interes = 0.05m; // Ejemplo de interés fijo del 5%
 
-            if (prestamoL.RegistrarPrestamo(idEmpleado, monto, plazos, 2.0m))
+            if (prestamoL.RegistrarPrestamo(idEmpleado, monto, plazos, interes))
             {
                 Response.Write("<script>alert('Préstamo registrado con éxito');</script>");
             }
@@ -41,15 +43,11 @@ namespace PrestamosDUNAMIS.Vistas
             }
         }
 
-        private List<Empleado> ObtenerEmpleados()
+        protected void btnLimpiar_Click(object sender, EventArgs e)
         {
-            // Simulación, puedes reemplazarlo con un llamado a la base de datos
-            return new List<Empleado>
-            {
-                new Empleado { IdEmpleado = 1, Nombre = "Empleado 1" },
-                new Empleado { IdEmpleado = 2, Nombre = "Empleado 2" }
-            };
+            ddlEmpleado.SelectedIndex = 0;
+            txtMonto.Text = string.Empty;
+            txtPlazos.Text = string.Empty;
         }
     }
-
 }

@@ -1,4 +1,6 @@
-﻿using PrestamosDUNAMIS.BaseDatos;
+﻿using System.Collections.Generic;
+using PrestamosDUNAMIS.BaseDatos;
+using PrestamosDUNAMIS.Modelos;
 
 namespace PrestamosDUNAMIS.Controladores
 {
@@ -10,6 +12,10 @@ namespace PrestamosDUNAMIS.Controladores
         {
             return prestamoBD.RegistrarPrestamo(idEmpleado, monto, plazos, interes);
         }
-    }
 
+        public List<Empleado> ObtenerEmpleados()
+        {
+            return prestamoBD.ObtenerEmpleados();
+        }
+    }
 }
