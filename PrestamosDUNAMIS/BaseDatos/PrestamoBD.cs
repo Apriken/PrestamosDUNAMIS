@@ -10,8 +10,11 @@ namespace PrestamosDUNAMIS.BaseDatos
     {
         public bool RegistrarPrestamo(int idEmpleado, decimal monto, int plazos, decimal interes)
         {
+
             string query = "INSERT INTO dbo.Prestamo (FK_idEmpleado, Monto, Fecha_Solicitud, FK_idPlazo, Interes, Estado) " +
                            "VALUES (@Empleado, @Monto, GETDATE(), @Plazo, @Interes, 'Pendiente')";
+
+            string query = "INSERT INTO Prestamo (FK_idEmpleado, Monto, Fecha_Solicitud, Plazo, Interes, Estado) VALUES (@Empleado, @Monto, GETDATE(), @Plazo, @Interes, 'Pendiente')";
 
             using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["cnx"].ToString()))
             {
