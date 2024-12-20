@@ -100,7 +100,7 @@
             <h2>Menú</h2>
             <ul class="nav flex-column">
     <li class="nav-item" id="liEvaluacionSolicitud" runat="server">
-        <a href="EvaluacionSolicitudPrestamo.aspx" class="nav-link text-white">
+        <a href="GestionarPrestamos.aspx" class="nav-link text-white">
             Gestionar Evaluación de Solicitudes de Préstamos
         </a>
     </li>

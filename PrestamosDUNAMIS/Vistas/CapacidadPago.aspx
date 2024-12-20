@@ -94,7 +94,12 @@
     <header>
         <h1>DUNAMIS S.A.</h1>
         <h2>Capacidad de Pago</h2>
+        <a class="btn btn-light" style="position: absolute; right: 20px;" href="PaginaPrincipal.aspx">
+    Volver al menú principal
+</a>
+
     </header>
+
     <main>
         <div class="container">
             <form id="CapacidadPagoForm" runat="server">

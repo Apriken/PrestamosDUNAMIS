@@ -67,6 +67,10 @@
                             <span class="h1">DUNAMIS S.A.</span>
                         </a>
                     </div>
+<a class="btn btn-light" style="position: absolute; right: 20px;" href="PaginaPrincipal.aspx">
+    Volver al menú principal
+</a>
+
                 </div>
             </nav>
         </header>
